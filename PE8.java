@@ -5,8 +5,8 @@ public class PE8 {
         }
         return false;
     }
-    public static int productOfNext13 (int[] arr, int index) {
-        int prod=1;
+    public static long productOfNext13 (int[] arr, int index) {
+        long prod=1;
         for (int i=index; i<index+13; i++) {
             prod*=arr[i];
         }
@@ -19,7 +19,7 @@ public class PE8 {
         for (int i=0; i<superBigNumber.length(); i++) {
             digits[i]=superBigNumber.charAt(i)-'0';
         }
-        int max=0;
+        long max=0;
         for (int i=0; i<=superBigNumber.length()-13; i++) {
             if (!zeroInNext13(digits, i)) {
                 if (productOfNext13(digits, i)>max) {
