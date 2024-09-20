@@ -1,4 +1,4 @@
-public class PE4 {
+public class PE0004 {
     /* 
     observations: a product of 2 3-digit numbers is either 5 or 6 digits
     first notice that there EXISTS a construction (405504=512*792),
