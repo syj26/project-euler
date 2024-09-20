@@ -1,4 +1,4 @@
-public class PE8 {
+public class PE0008 {
     public static boolean zeroInNext13 (int[] arr, int index) {
         for (int i=index; i<index+13; i++) {
             if (arr[i]==0) {return true;}
