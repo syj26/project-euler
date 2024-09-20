@@ -1,4 +1,4 @@
-public class PE2 {
+public class PE0002 {
   public static int fib(int n) {
     if (n==0) {return 1;}
     if (n==1) {return 2;}
