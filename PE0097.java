@@ -34,18 +34,26 @@ public class PE0097 {
         return ans;
     }
 
-    public static int powModN(int base, int exp, int n) {
-        int[] expBinary = cleanBinaryArray(exp);
-        int[] modNValues = new int[expBinary.length]; 
+    public static long powModN(int base, int exp, int n) {
+        int[] expBinaryRep = cleanBinaryArray(exp);
+        long[] modNValues = new long[expBinaryRep.length]; 
+        long ans=1;
         //basically, each value is base^(2^i) mod n 
         //chat was it a mistake to make the binary rep array go forwards... (it was)
-        modNValues[modNValues.length-1]=base;
-        for (int i=modNValues.length-2; i>=0; i--) {
-            modNValues[i]=modNValues[i+1]*modNValues[i+1];
+        //(i made it go backwards again yayyy)
+        modNValues[0]=(long) base%n;
+        for (int i=1; i<modNValues.length; i++) {
+            modNValues[i]=(modNValues[i-1]*modNValues[i-1])%n;
         }
-        return 0;
+        for (int i=0; i<modNValues.length; i++) {
+            if (expBinaryRep[i]==1) {
+                ans*=modNValues[i];
+                ans%=n;
+            }
+        }
+        return ans;
     }
-    public static void testCases(int n) {
+    public static void testCasesBinary(int n) {
         System.out.print("the binary rep of "+n+" is ");
         for (int i=0; i<31; i++) {
             System.out.print(binaryArray(n)[i]);
@@ -57,11 +65,27 @@ public class PE0097 {
         System.out.print("\n");
     }
 
+    public static void testCasesPowModN(int base, int exp, int n) {
+        System.out.print(base + " to the " + exp + " mod " + n + " is ");
+        System.out.println(powModN(base, exp, n));
+    }
+
     public static void main(String[] args) {
-        testCases(0);
-        testCases(15);
-        testCases(8);
-        testCases(2024);
-        testCases((int)Math.pow(2, 30)-1+(int)Math.pow(2, 30));
+        testCasesBinary(0);
+        testCasesBinary(15);
+        testCasesBinary(8);
+        testCasesBinary(2024);
+        testCasesBinary((int)Math.pow(2, 30)-1+(int)Math.pow(2, 30));
+        testCasesPowModN(2, 5, 1000);
+        testCasesPowModN(3, 8, 1000);
+        testCasesPowModN(4, 6, 1000);
+        testCasesPowModN(5, 4, 1000);
+        int expmod5to9 = 7830457 % (4*(int) Math.pow(5, 9)); //euler's thm phi(5^10)=4*5^9
+        System.out.println(expmod5to9);
+        int fiveto10 = (int) Math.pow(5, 10);
+        System.out.println(powModN(2, expmod5to9, fiveto10));
+        testCasesPowModN(2, expmod5to9, fiveto10);
+        long answer=Long.sum(28433L*powModN(2, expmod5to9, fiveto10), 1L);
+        System.out.println(answer);
     }
 }
