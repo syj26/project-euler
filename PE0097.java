@@ -66,7 +66,7 @@ public class PE0097 {
     }
 
     public static void testCasesPowModN(int base, int exp, int n) {
-        System.out.print(base + " to the " + exp + " mod " + n + " is ");
+        System.out.print(base + "^" + exp + " mod " + n + " is ");
         System.out.println(powModN(base, exp, n));
     }
 
@@ -81,11 +81,17 @@ public class PE0097 {
         testCasesPowModN(4, 6, 1000);
         testCasesPowModN(5, 4, 1000);
         int expmod5to9 = 7830457 % (4*(int) Math.pow(5, 9)); //euler's thm phi(5^10)=4*5^9
-        System.out.println(expmod5to9);
+        System.out.println("exponent mod phi(5^10) is " + expmod5to9);
         int fiveto10 = (int) Math.pow(5, 10);
-        System.out.println(powModN(2, expmod5to9, fiveto10));
+        System.out.println("2 to the big thing is " + powModN(2, expmod5to9, fiveto10));
         testCasesPowModN(2, expmod5to9, fiveto10);
-        long answer=Long.sum(28433L*powModN(2, expmod5to9, fiveto10), 1L);
-        System.out.println(answer);
+        long answer=Long.sum((28433L*powModN(2, expmod5to9, fiveto10))%fiveto10, 1L);
+        System.out.println("answer is " + answer + " mod 5^10");
+        System.out.println("answer mod 5^10 is " + answer%1024 + " mod 2^10"); //gonna use crt, manually bc i don't wanna code anymore
+        System.out.println("5^10 is " + fiveto10%1024 + " mod 2^10");
+        for (int i=0; i<1024; i++) {
+            if ((627+761*i)%1024==0) {System.out.println("627+761*"+i+" == 0 mod 1024");}
+        }
+        System.out.print("ACTUAL answer is " + (answer+53*fiveto10));
     }
 }
