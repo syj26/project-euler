@@ -81,6 +81,7 @@ public class PE0097 {
         testCasesPowModN(4, 6, 1000);
         testCasesPowModN(5, 4, 1000);
         int expmod5to9 = 7830457 % (4*(int) Math.pow(5, 9)); //euler's thm phi(5^10)=4*5^9
+        System.out.println("phi(5^10) is "+4*(int) Math.pow(5, 9));
         System.out.println("exponent mod phi(5^10) is " + expmod5to9);
         int fiveto10 = (int) Math.pow(5, 10);
         System.out.println("2 to the big thing is " + powModN(2, expmod5to9, fiveto10));
@@ -94,4 +95,4 @@ public class PE0097 {
         }
         System.out.print("ACTUAL answer is " + (answer+53*fiveto10));
     }
-}
+}//527101952
